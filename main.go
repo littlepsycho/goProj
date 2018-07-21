@@ -8,6 +8,35 @@ import (
 
 const s string = "constant"
 
+func fact(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * fact(n-1)
+}
+
+func intSeq() func() int {
+	i := 0
+
+	return func() int {
+		i += 1
+		return i
+	}
+}
+
+func sum(nums ...int) {
+	fmt.Print(nums, " ")
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+	fmt.Println(total)
+}
+
+func ExmplMultVals() (int, int) {
+	return 3, 7
+}
+
 func ExmplRange() {
 	nums := []int{2, 3, 4}
 
@@ -247,4 +276,35 @@ func main() {
 	ExmplSlice()
 	ExmplMap()
 	ExmplRange()
+
+	fmt.Println("Mult Value")
+
+	a, b := ExmplMultVals()
+	fmt.Println(a)
+	fmt.Println(b)
+
+	_, c := ExmplMultVals()
+	fmt.Println(c)
+
+	fmt.Println("variadic func:")
+
+	sum(1, 2)
+	sum(1, 2, 3)
+
+	nums := []int{1, 2, 3, 4}
+	sum(nums...)
+
+	fmt.Println("闭包")
+	nextInt := intSeq()
+
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+
+	newInts := intSeq()
+	fmt.Println(newInts())
+
+	fmt.Println("face:")
+	fmt.Println(fact(7))
+
 }
